@@ -41,6 +41,14 @@ resource "aws_security_group" "jenkins-sg" {
     protocol    = "tcp"
     cidr_blocks = [var.external_ip]
   }
+
+  ingress {
+    description = "allow rds from ec2 in us-east-1"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
   ingress {
     description     = "allow anyone on port 8080"
     from_port       = 8080
